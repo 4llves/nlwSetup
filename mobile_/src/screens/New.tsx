@@ -28,7 +28,7 @@ export function New() {
       }
 
       await api.post('/habits', { title, weekDays })
-      
+
       setTitle('');
       setWeekDays([]);
 
@@ -41,7 +41,7 @@ export function New() {
 
   return (
     <View className="flex-1 bg-background px-8 pt-16">
-      <ScrollView 
+      <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 100 }}
       >
@@ -55,7 +55,7 @@ export function New() {
           Qual seu comprometimento?
         </Text>
 
-        <TextInput 
+        <TextInput
           className="h-12 pl-4 rounded-lg mt-3 bg-zinc-900 text-white border-2 border-zinc-800 focus:border-green-600"
           placeholder="Exercícios, dormir bem, etc..."
           placeholderTextColor={colors.zinc[400]}
@@ -83,10 +83,10 @@ export function New() {
           activeOpacity={0.7}
           onPress={handleCreateNewHabit}
         >
-          <Feather 
-           name="check"
-           size={20}
-           color={colors.white}
+          <Feather
+            name="check"
+            size={20}
+            color={colors.white}
           />
 
           <Text className="font-semibold text-base text-white ml-2">

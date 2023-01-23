@@ -4,7 +4,7 @@ import { z } from "zod"
 import { prisma } from "./lib/prisma"
 
 export async function appRoutes(app: FastifyInstance) {
-  app.post('/habits', async (req) => {
+  app.post('/habits', async (request) => {
     const createHabitBody = z.object({
       title: z.string(),
       weekDays: z.array(
@@ -12,7 +12,7 @@ export async function appRoutes(app: FastifyInstance) {
       ),
     })
 
-    const { title, weekDays } = createHabitBody.parse(req.body)
+    const { title, weekDays } = createHabitBody.parse(request.body)
 
     const today = dayjs().startOf('day').toDate()
 
@@ -31,12 +31,12 @@ export async function appRoutes(app: FastifyInstance) {
     })
   })
 
-  app.get('/day', async (req) => {
+  app.get('/day', async (request) => {
     const getDayParams = z.object({
       date: z.coerce.date(),
     })
 
-    const { date } = getDayParams.parse(req.query)
+    const { date } = getDayParams.parse(request.query)
 
     const parsedDate = dayjs(date).startOf('day')
     const weekDay = parsedDate.get('day')
@@ -73,12 +73,12 @@ export async function appRoutes(app: FastifyInstance) {
     }
   })
 
-  app.patch('/habits/:id/toggle', async (req) => {
+  app.patch('/habits/:id/toggle', async (request) => {
     const toggleHabitParams = z.object({
       id: z.string().uuid()
     })
 
-    const { id } = toggleHabitParams.parse(req.params)
+    const { id } = toggleHabitParams.parse(request.params)
 
     const today = dayjs().startOf('day').toDate()
 
